@@ -1653,7 +1653,7 @@ def main():
     application.add_error_handler(error_handler)
 
     WEBHOOK_URL = os.getenv("WEBHOOK_URL")
-    PORT = int(os.getenv("PORT", 7860))
+    PORT = int(os.getenv("PORT", 8080))
 
     if WEBHOOK_URL:
         if not WEBHOOK_URL.startswith("http"):
@@ -1662,14 +1662,25 @@ def main():
         url_path = f"/{BOT_TOKEN}"
         if not WEBHOOK_URL.endswith(url_path):
             WEBHOOK_URL = f"{WEBHOOK_URL.rstrip('/')}{url_path}"
-            
+
+        secret_token = os.getenv("WEBHOOK_SECRET") or None
+
         logger.info(f"Starting bot in WEBHOOK mode on port {PORT}...")
+        logger.info(f"WEBHOOK DEBUG: url_path = {url_path}")
+        logger.info(f"WEBHOOK DEBUG: webhook_url = {WEBHOOK_URL}")
+        logger.info(f"WEBHOOK DEBUG: secret_token set = {secret_token is not None}")
+
+        # Add an update processor to log incoming updates
+        async def log_update(update: Update) -> None:
+            logger.info(f"WEBHOOK INCOMING UPDATE: type={type(update).__name__}, update_id={update.update_id}")
+
         application.run_webhook(
             listen="0.0.0.0",
             port=PORT,
             url_path=url_path,
             webhook_url=WEBHOOK_URL,
-            secret_token=os.getenv("WEBHOOK_SECRET") or None,
+            secret_token=secret_token,
+            drop_pending_updates=True,
         )
     else:
         logger.info("No WEBHOOK_URL found. Starting bot in POLLING mode...")
