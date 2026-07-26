@@ -846,47 +846,24 @@ async def owner_looking_for_date_filter(update: Update, context: ContextTypes.DE
 
 
 async def seeker_looking_for_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Seeker clicked 'Looking For' — ask for their purpose."""
+    """Seeker clicked 'Looking For' — skip purpose if already known."""
     context.user_data["in_looking_for_post"] = True
     context.user_data["in_looking_for_search"] = False
     
-    keyboard = [
-        [strings.PURPOSE_BUY],
-        [strings.PURPOSE_RENT],
-        [strings.PURPOSE_SERVICE],
-        [strings.CANCEL]
-    ]
-    await update.message.reply_text(
-        strings.SEEKER_ASK_PURPOSE,
-        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
-    )
-    return SEEKER_LOOKING_FOR_PURPOSE
-
-async def seeker_looking_for_purpose(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    purpose_text = update.message.text
-    if purpose_text == strings.PURPOSE_BUY:
-        context.user_data["looking_for_purpose"] = 'buy'
-        context.user_data["seeker_property_purpose"] = 'buy'
-        context.user_data["seeker_listing_type"] = 'property'
-    elif purpose_text == strings.PURPOSE_RENT:
-        context.user_data["looking_for_purpose"] = 'rent'
-        context.user_data["seeker_property_purpose"] = 'rent'
-        context.user_data["seeker_listing_type"] = 'property'
-    elif purpose_text == strings.PURPOSE_SERVICE:
-        context.user_data["looking_for_purpose"] = 'service'
-        context.user_data["seeker_property_purpose"] = 'service'
-        context.user_data["seeker_listing_type"] = 'service'
-    elif purpose_text == "ሁሉም" or purpose_text == strings.CANCEL:
-        context.user_data["looking_for_purpose"] = None
-        context.user_data["seeker_property_purpose"] = None
-        context.user_data["seeker_listing_type"] = None
-    else:
-        # Default fallback
-        context.user_data["looking_for_purpose"] = 'buy'
-        context.user_data["seeker_property_purpose"] = 'buy'
-        context.user_data["seeker_listing_type"] = 'property'
+    listing_type = context.user_data.get("seeker_listing_type")
+    prop_purpose = context.user_data.get("seeker_property_purpose")
     
+    if listing_type == 'service':
+        context.user_data["looking_for_purpose"] = 'service'
+    elif prop_purpose == 'sell':
+        context.user_data["looking_for_purpose"] = 'buy'
+    elif prop_purpose == 'rent':
+        context.user_data["looking_for_purpose"] = 'rent'
+    else:
+        context.user_data["looking_for_purpose"] = None
+        
     return await seeker_ask_category(update, context)
+
 
 
 async def seeker_create_alert_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1610,9 +1587,7 @@ def main():
             SEARCH_QUERY: [MessageHandler(filters.TEXT & ~filters.COMMAND & ~filters.Text(strings.CANCEL), execute_search)],
             ADMIN_BROADCAST: [MessageHandler(filters.ALL & ~filters.COMMAND & ~filters.Text(strings.CANCEL), broadcast_message)],
             # Looking For flow
-            SEEKER_LOOKING_FOR_PURPOSE: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND & ~filters.Text(strings.CANCEL), seeker_looking_for_purpose)
-            ],
+
             SEEKER_ALERT_CATEGORY: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND & ~filters.Text(strings.CANCEL), seeker_alert_category)
             ],
