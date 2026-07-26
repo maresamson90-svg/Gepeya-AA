@@ -1499,6 +1499,52 @@ def run_health_check_server():
     server.serve_forever()
 
 
+def _normalize_webhook_url(webhook_url: str) -> tuple[str, str]:
+    if not webhook_url.startswith("http"):
+        webhook_url = f"https://{webhook_url}"
+
+    url_path = f"/{BOT_TOKEN}"
+    if not webhook_url.endswith(url_path):
+        webhook_url = f"{webhook_url.rstrip('/')}{url_path}"
+
+    return webhook_url, url_path
+
+
+def _start_webhook(application: Application, port: int) -> None:
+    webhook_url = os.getenv("WEBHOOK_URL")
+    if not webhook_url:
+        raise ValueError("WEBHOOK_URL environment variable is required when BOT_UPDATE_MODE=webhook")
+
+    webhook_url, url_path = _normalize_webhook_url(webhook_url)
+
+    logger.info(f"Starting bot in WEBHOOK mode on port {port}...")
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=port,
+        url_path=url_path,
+        webhook_url=webhook_url,
+        secret_token=os.getenv("WEBHOOK_SECRET") or None,
+    )
+
+
+def _start_polling(application: Application) -> None:
+    logger.warning("=" * 60)
+    logger.warning("No WEBHOOK_URL found. Starting bot in POLLING mode...")
+    logger.warning("WARNING: Polling mode DELETES the production webhook!")
+    logger.warning("If your bot is deployed on Railway, it will STOP receiving")
+    logger.warning("updates there until you redeploy or manually set webhook.")
+    logger.warning("=" * 60)
+    threading.Thread(target=run_health_check_server, daemon=True).start()
+
+    logger.info("Bot is now polling for updates...")
+    application.run_polling(
+        poll_interval=1.0,
+        timeout=20,
+        bootstrap_retries=5,
+        drop_pending_updates=True,
+    )
+
+
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -1652,40 +1698,16 @@ def main():
         logger.error(msg="Exception while handling an update:", exc_info=context.error)
     application.add_error_handler(error_handler)
 
-    WEBHOOK_URL = os.getenv("WEBHOOK_URL")
-    PORT = int(os.getenv("PORT", 7860))
+    update_mode = (os.getenv("BOT_UPDATE_MODE") or "webhook").strip().lower()
+    port = int(os.getenv("PORT", 7860))
 
-    if WEBHOOK_URL:
-        if not WEBHOOK_URL.startswith("http"):
-            WEBHOOK_URL = f"https://{WEBHOOK_URL}"
-            
-        url_path = f"/{BOT_TOKEN}"
-        if not WEBHOOK_URL.endswith(url_path):
-            WEBHOOK_URL = f"{WEBHOOK_URL.rstrip('/')}{url_path}"
-
-        logger.info(f"Starting bot in WEBHOOK mode on port {PORT}...")
-        application.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,
-            url_path=url_path,
-            webhook_url=WEBHOOK_URL,
-            secret_token=os.getenv("WEBHOOK_SECRET") or None,
-        )
+    if update_mode == "webhook":
+        _start_webhook(application, port)
+    elif update_mode == "polling":
+        _start_polling(application)
     else:
-        logger.warning("=" * 60)
-        logger.warning("No WEBHOOK_URL found. Starting bot in POLLING mode...")
-        logger.warning("WARNING: Polling mode DELETES the production webhook!")
-        logger.warning("If your bot is deployed on Railway, it will STOP receiving")
-        logger.warning("updates there until you redeploy or manually set webhook.")
-        logger.warning("=" * 60)
-        threading.Thread(target=run_health_check_server, daemon=True).start()
-
-        logger.info("Bot is now polling for updates...")
-        application.run_polling(
-            poll_interval=1.0,
-            timeout=20,
-            bootstrap_retries=5,
-            drop_pending_updates=True,
+        raise ValueError(
+            f"Invalid BOT_UPDATE_MODE={update_mode!r}. Use 'webhook' or 'polling'."
         )
 
 

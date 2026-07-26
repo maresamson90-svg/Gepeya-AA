@@ -24,8 +24,10 @@ Whether deploying to **Railway** or **Hugging Face**, configure the following en
 - `ADMIN_IDS`: Comma-separated list of your Telegram User IDs.
 - `DATABASE_URL`: Your PostgreSQL connection string (optional, defaults to local SQLite).
 - `GEMINI_API_KEY`: Your Google AI Studio API key.
-- `WEBHOOK_URL`: The URL of your app (e.g., `your-app.up.railway.app` or `https://user-space.hf.space`). 
-  - *Note: The bot automatically validates this, prepends `https://`, and uses your `BOT_TOKEN` as a secure webhook path to prevent 502/404 errors.*
+- `BOT_UPDATE_MODE`: `webhook` (default) or `polling`. Production should use `webhook`.
+- `WEBHOOK_URL`: Required when `BOT_UPDATE_MODE=webhook`. Public URL of your app (e.g., `your-app.up.railway.app` or `https://user-space.hf.space`).
+  - *Note: The bot prepends `https://` if needed and appends `/{BOT_TOKEN}` as the webhook path.*
+- `WEBHOOK_SECRET`: Optional Telegram webhook `secret_token`.
 
 ### 3. Deploy to Railway (Recommended)
 - Connect your GitHub repository to Railway.
@@ -39,7 +41,11 @@ Whether deploying to **Railway** or **Hugging Face**, configure the following en
 
 ## Local Development
 
-To run locally, copy `.env.example` to `.env` and fill in the values (leave `WEBHOOK_URL` empty to run in Polling Mode):
+Copy `.env.example` to `.env` and fill in the values.
+
+**Webhook (default, matches production):** set `BOT_UPDATE_MODE=webhook` and `WEBHOOK_URL` to your public HTTPS origin (on Railway/HF this is your app URL; locally use a tunnel such as ngrok or Cloudflare Tunnel pointing at `PORT`, default `7860`).
+
+**Polling (local alternative):** set `BOT_UPDATE_MODE=polling` and leave `WEBHOOK_URL` empty. Do not use polling with the same bot token while production is on webhook—it removes the deployed webhook.
 
 ```bash
 # Create and activate virtual environment (Windows)
