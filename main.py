@@ -1645,6 +1645,7 @@ def main():
         conversation_timeout=900,  # 15 minutes
         persistent=True,
         name="main_conversation",
+        per_message=False,
     )
 
     application.add_handler(conv_handler)
@@ -1661,8 +1662,11 @@ def main():
     if job_queue:
         from datetime import time, timezone, timedelta
         eat_tz = timezone(timedelta(hours=3))  # East Africa Time (UTC+3)
+        async def expire_listings_job(context: ContextTypes.DEFAULT_TYPE):
+            database.expire_old_listings()
+
         job_queue.run_daily(
-            lambda ctx: database.expire_old_listings(),
+            expire_listings_job,
             time=time(hour=3, minute=0, tzinfo=eat_tz)
         )
 

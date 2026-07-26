@@ -10,7 +10,8 @@ WELCOME_MSG = (
 
 # ── Channel subscription ──────────────────────────────────────────────────────
 SUBSCRIBE_PROMPT = (
-    "📢 <b>እባክዎን ለቀጠናችን ቻናል ይጠቀሙ!</b>\n\n"
+    # "📢 <b>እባክዎን ለቀጠናችን ቻናል ይጠቀሙ!</b>\n\n"
+    "📢 <b>እባክዎን ቀጣዩን ቻናል ይጠቀሙ!</b>\n\n"
     "ቦቱን ለመጠቀም <b>@meznagna_26</b> ቻናላችንን ይቀላቀሉ፣ ከዚያ ቀጥለው <b>✅ ተቀላቀልኩ</b> ን ይጫኑ።"
 )
 SUBSCRIBE_BTN = "✅ ተቀላቀልኩ — ቀጥል"
@@ -40,7 +41,7 @@ OWNER_UNLIST_BTN = "❌ ዝርዝሩን አጥፋ/አልቋል"
 OWNER_UNLIST_CONFIRM = "ዝርዝሩ በተሳካ ሁኔታ ተነስቷል።"
 
 OWNER_START = "እባክዎን የንብረቱን/የአገልግሎቱን አይነት አጭር መግለጫ ይጻፉ (ለምሳሌ፦ ባለ 2 ክፍል ኮንዶሚኒየም፣ የቧንቧ ጥገና፣ ...)"
-OWNER_VIEW_LOOKING_FOR = "🔍 የፈላጊዎችን ጥያቄ እይ (View Looking For)"
+OWNER_VIEW_LOOKING_FOR = "🔍 የፈላጊዎችን ፍላጎት እይ"
 
 # Category selection
 OWNER_ASK_CATEGORY = "📂 እባክዎን ምድቡን ይምረጡ:"
@@ -67,7 +68,7 @@ OWNER_ASK_PRICE = "ዋጋዉ ስንት ነው? (በቁጥር ወይም በቃላ
 # ── Photo Upload ──────────────────────────────────────────────────────────────
 OWNER_ASK_PHOTO = (
     "📷 <b>እባክዎን የንብረቱን/የአገልግሎቱን ፎቶ ይላኩ።</b>\n\n"
-    "• ፎቶዎችን አንድ ずつ (አንድ አንድ) ይላኩ።\n"
+    "• ፎቶዎችን አንድ በ አንድ) ይላኩ።\n"
     "• ሁሉም ፎቶዎች ሲያልቁ <b>📸 ፎቶ መጫን ጨርሻለሁ</b> ን ይጫኑ።\n"
     "• ፎቶ ከሌለዎት /skip ይጫኑ ወይም 'ዝለል' ይጻፉ።"
 )
@@ -103,16 +104,17 @@ OWNER_RENEW_PROMPT = "ዝርዝሩ ከ30 ቀናት በኋላ እንዲቀጥል 
 PAYMENT_GUIDE = "እባክዎን ከኢትዮጵያ ንግድ ባንክ የደረስዎትን የክፍያ ስክሪንሾት (Screenshot) ወይም የትራንዛክሽን ቁጥር (Transaction ID) በትክክል ያስገቡ።"
 OWNER_PAYMENT_PENDING = "ክፍያዎ በተሳካ ሁኔታ ተመዝግቧል! ✅ አስተዳዳሪው ሲያጸድቀው ዝርዝርዎ በቦቱ ላይ ይወጣል። እናመሰግናለን።"
 OWNER_PAYMENT_SUCCESS = "እንኳን ደስ አለዎት! 🎉 ዝርዝርዎ በአስተዳዳሪው ጸድቆ ለፈላጊዎች ክፍት ሆኗል።"
-OWNER_LISTING_REJECTED = "❌ ዝርዝርዎ አልተፈቀደም። ምክንያቱን ለማግኘት እባክዎን 0985605005 ይደውሉ።"
+OWNER_LISTING_REJECTED = "❌ ዝርዝርዎ አልተፈቀደም። ምክንያቱን ለማወቅ እባክዎን በ 0985605005 ይደውሉ።"
 OWNER_SUCCESS = "በተሳካ ሁኔታ ተመዝግቧል! ✅"
 
 # Seeker Flow
 SEEKER_MENU_MSG = "ምን ማድረግ ይፈልጋሉ?"
 SEEKER_SEARCH = "🔍 በከተማ, ሰፈር ፈልግ"
-SEEKER_LOOKING_FOR = "🔎 እየፈለኩትን ይላኩ (Looking For)"
-SEEKER_MANAGE = "📝 የኔን ጥያቄዎች አስተዳድር (Manage My Requests)"
-SEEKER_CREATE_ALERT = "🔔 ማሳወቂያ ፍጠር (Create Alert)"
-SEEKER_MANAGE_ALERTS = "🔕 ማሳወቂያዎችን ሰርዝ (Manage Alerts)"
+# SEEKER_LOOKING_FOR = "🔎 እየፈለኩትን ይላኩ (Looking For)"
+SEEKER_LOOKING_FOR = "🔎 ፍላጎቶን ይላኩ"
+SEEKER_MANAGE = "📝 የኔን ፍላጎቶች አስተዳድር"
+SEEKER_CREATE_ALERT = "🔔 ማሳወቂያ ፍጠር"
+SEEKER_MANAGE_ALERTS = "🔕 ማሳወቂያዎችን ሰርዝ"
 SEEKER_VIEW_ALL = "ሁሉንም ዝርዝሮች እይ"
 SEEKER_ASK_CATEGORY = "📂 እባክዎን የሚፈልጉትን ምድብ ይምረጡ:"
 SEEKER_ASK_SEARCH = "የሚፈልጉትን ሰፈር ከታች ካለው ዝርዝር ይምረጡ።"
@@ -122,24 +124,24 @@ SEEKER_NO_MATCH = "በዚህ አካባቢ የተመዘገበ መረጃ አልተ
 
 # Looking For flow
 SEEKER_ASK_LOOKING_FOR = (
-    "🔎 <b>እየፈለኩትን ይግለጹ:</b>\n\n"
-    "• ዋጋ (ለምሳሌ፦ 5000 ብር) ወይም\n"
-    "• ምን ዓይነት ንብረት/አገልግሎት እንደሚፈልጉ በቃላት ይጻፉ\n"
+    "🔎 <b>ፍላጎቶን ይግለጹ:</b>\n\n"
+    "• ምን ዓይነት ንብረት/አገልግሎት እንደሚፈልጉ ይጻፉ\n"
     "  (ለምሳሌ፦ «ባለ 2 ክፍል ቤት ቦሌ አካባቢ 5000 ብር ድረስ»)\n\n"
-    "ጥያቄዎ ለሻጮች/አከራዮች ይተዳዳሪ ይሆናል።"
+    "ጥያቄዎ ለሻጮች/አከራዮች/አገልግሎት ሰጪዎች  የሚታይ ይሆናል።"
 )
 SEEKER_LOOKING_FOR_SENT = (
-    "✅ <b>ጥያቄዎ ክፍያ ተቀብሏል!</b>\n\n"
-    "አስተዳዳሪው ሲያጸድቀው ጥያቄዎ ለሻጮች/አከራዮች ይቀርባል።\n"
+    # "✅ <b>ጥያቄዎ ክፍያ ተቀብሏል!</b>\n\n"
+    "✅ <b>ጥያቄዎ ደርሶናል!</b>\n\n"
+    "አስተዳዳሪው ሲያጸድቀው ጥያቄዎ ለሻጮች/አከራዮች/አገልግሎት ሰጪዎች ይቀርባል።\n"
     "ሲጸድቅ ማሳወቂያ ይደርስዎታል። እናመሰግናለን!"
 )
 SEEKER_LOOKING_FOR_APPROVED = (
     "✅ <b>ጥያቄዎ ጸድቋል!</b>\n\n"
-    "ጥያቄዎ ለሻጮች/አከራዮች ቀርቧል።\n"
-    "ብዙም ሳይቆይ ሊደወሉልዎ ይችላሉ።"
+    "ጥያቄዎ ለሻጮች/አከራዮች/አገልግሎት ሰጪዎች ቀርቧል።\n"
+    "ብዙም ሳይቆይ ሊደወልሎ ይችላል።"
 )
 SEEKER_LOOKING_FOR_ADMIN = (
-    "🔍 <b>አዲስ «እፈልጋለሁ» ጥያቄ — ክፍያ ተፈጽሟል!</b>\n\n"
+    "🔍 <b>አዲስ «ፍላጎት» ጥያቄ — ክፍያ ተፈጽሟል!</b>\n\n"
     "ከ: {seeker}\n"
     "ምድብ: {category}\n"
     "ከተማ (City): {city}\n"
@@ -150,7 +152,7 @@ SEEKER_LOOKING_FOR_ADMIN = (
     "ክፍያ: 50 ብር (ቋሚ)\n"
     "TxID: {txid}"
 )
-SEEKER_ASK_CONTACT_FOR_LOOKING = "📞 ስልክ ቁጥርዎን ያስገቡ (ሸያጩ/አከራዩ ሊያናግርዎ):"
+SEEKER_ASK_CONTACT_FOR_LOOKING = "📞 ስልክ ቁጥርዎን ያስገቡ (ሻጭ/አከራይ/አገልግሎት ሰጪ እንድያናግርዎ):"
 SEEKER_ASK_PAYMENT_LOOKING_FOR = (
     "🙏 <b>ጥያቄዎ ሊጠናቀቅ ጥቂት ቀርቶታል!</b>\n\n"
     "ጥያቄዎ ለሻጮች/አከራዮች እንዲደርስ የምዝገባ ክፍያ <b>50 ብር</b> ብቻ ይከፍሉ።\n\n"
@@ -159,10 +161,10 @@ SEEKER_ASK_PAYMENT_LOOKING_FOR = (
     "   <b>የኢትዮጵያ ንግድ ባንክ አካዉንት ቁጥር፦ 1000174738533</b>\n\n"
     "👇 <i>ክፍያውን ከፈጸሙ በኋላ፣ ከኢትዮጵያ ንግድ ባንክ የደረስዎትን የክፍያ ስክሪንሾት (Screenshot) ወይም የትራንዛክሽን ቁጥር (Transaction ID) እባክዎን እዚህ ይላኩ፦</i>"
 )
-SEEKER_ASK_PURPOSE = "እባክዎን የሚፈልጉትን አይነት ይምረጡ (Choose Purpose):"
-PURPOSE_BUY = "🛒 ግዢ (Buy)"
-PURPOSE_RENT = "🏠 ኪራይ (Rent)"
-PURPOSE_SERVICE = "🛠️ አገልግሎት (Service)"
+SEEKER_ASK_PURPOSE = "እባክዎን ከታች ካሉት አማራጮች ይምረጡ:"
+PURPOSE_BUY = "🛒 ግዢ"
+PURPOSE_RENT = "🏠 ኪራይ"
+PURPOSE_SERVICE = "🛠️ አገልግሎት"
 
 SEEKER_ALERT_CREATED = "✅ <b>ማሳወቂያዎ ተፈጥሯል!</b>\n\nከምርጫዎ ጋር የሚስማማ አዲስ ነገር ሲገባ መልእክት እንልክልዎታለን።"
 ALERT_NOTIFICATION_MSG = "🔔 <b>አዲስ ማሳወቂያ!</b>\n\nየምትፈልጉት አይነት አዲስ ነገር ተለቋል:\n\n{title}\n\nወደ ዋናው ምናሌ በመሄድ መፈለግ ይችላሉ!"
@@ -182,8 +184,8 @@ LISTING_TEMPLATE = (
 )
 
 LOOKING_FOR_CHANNEL_POST = (
-    "🔎 <b>እፈልጋለሁ — ተፈላጊ</b>\n\n"
-    "👤 ፉላ። {seeker}\n"
+    "🔎 <b>ፍላጎት — ተፈላጊ</b>\n\n"
+    "👤 ፈላጊ። {seeker}\n"
     "📌 ከተማ፦ {city}\n"
     "📍 ሰፈር፦ {neighborhood}\n"
     "🛋️ ዓላማ፦ {purpose}\n"
@@ -207,7 +209,7 @@ ADMIN_STATS = (
     "👥 ጠቅላላ ተጠቃሚዎች፦ <b>{total}</b>\n\n"
     "🏠 ንቁ ዝርዝሮች (ንብረት/ኪራይ)፦ <b>{active_property}</b>\n"
     "🛠️ ንቁ አገልግሎት ዝርዝሮች፦ <b>{active_service}</b>\n"
-    "🔎 ንቁ «እፈልጋለሁ» ጥያቄዎች፦ <b>{active_looking}</b>\n"
+    "🔎 ንቁ «ፍላጎት» ጥያቄዎች፦ <b>{active_looking}</b>\n"
     "⏳ ሊጸድቁ እየጠበቁ ያሉ፦ <b>{pending}</b>\n\n"
     "👤 ሻጮች/አከራዮች (ግምት)፦ <b>{owners}</b>\n"
     "👤 ገዢዎች/ተከራዮች (ግምት)፦ <b>{seekers}</b>"
@@ -245,12 +247,12 @@ HELP_MSG = (
     "<b>🔍 ለገዢዎች፣ ተከራዮች፣ እና አገልግሎት ፈላጊዎች:</b>\n"
     "• /start → 'ተከራይ/ገዢ/አገልግሎት ፈላጊ ነኝ' ይምረጡ\n"
     "• ሁሉንም ዝርዝሮች ይመልከቱ ወይም በከተማና አካባቢ ይፈልጉ\n"
-    "• «🔎 እየፈለኩትን ይላኩ» ን ተጠቅመው ምን እንደሚፈልጉ ይጻፉ — ሻጮች/አከራዮች ያናግሩዎታል\n"
-    "• ከተመቸዎ፣ ባለቤቱን ስልክ ደውለው ያናግሩ\n\n"
+    "• ከተመቸዎ፣ ባለቤቱን ስልክ ደውለው ያናግሩ\n"
+    "• «🔎 ፍላጎቶን ይላኩ» ን ተጠቅመው ምን እንደሚፈልጉ ይጻፉ — ሻጮች/አከራዮች/አገልግሎት ሰጪዎች ያናግሩዎታል\n\n"
     "<b>ለአገልግሎት ሰጪዎች:</b>\n"
-    "• ክፍያ 50 ብር ብቻ ነው\n\n"
+    "• ክፍያ በወር 50 ብር ብቻ ነው\n\n"
     "<b>ማስታወቂያ ማስነገር ለምፈልጉ:</b>\n"
-    "• በርካታ ተከታዮች ባሉት Sam Technologies የTelegram Channel ማስታወቂያ ማስነገር ከፈለጉ በ0985605005 ይደዉሉ\n\n"
+    "• በርካታ ተከታዮች ባሉት Sam Technologies የTelegram Channel ማስታወቂያ ማስነገር ከፈለጉ በ 0985605005 ይደዉሉ\n\n"
     "<b>ለበለጠ መረጃ:</b>\n"
     "• 0985605005\n\n"
     "<b>📌 ሌሎች ትዕዛዞች:</b>\n"
