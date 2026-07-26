@@ -1656,12 +1656,16 @@ def main():
     PORT = int(os.getenv("PORT", 7860))
 
     if WEBHOOK_URL:
+        if not WEBHOOK_URL.startswith("http"):
+            WEBHOOK_URL = f"https://{WEBHOOK_URL}"
+            
         logger.info(f"Starting bot in WEBHOOK mode on port {PORT}...")
         application.run_webhook(
             listen="0.0.0.0",
             port=PORT,
+            url_path="/",
             webhook_url=WEBHOOK_URL,
-            secret_token=os.getenv("WEBHOOK_SECRET", ""),
+            secret_token=os.getenv("WEBHOOK_SECRET") or None,
         )
     else:
         logger.info("No WEBHOOK_URL found. Starting bot in POLLING mode...")
