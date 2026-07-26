@@ -1659,11 +1659,15 @@ def main():
         if not WEBHOOK_URL.startswith("http"):
             WEBHOOK_URL = f"https://{WEBHOOK_URL}"
             
+        url_path = f"/{BOT_TOKEN}"
+        if not WEBHOOK_URL.endswith(url_path):
+            WEBHOOK_URL = f"{WEBHOOK_URL.rstrip('/')}{url_path}"
+            
         logger.info(f"Starting bot in WEBHOOK mode on port {PORT}...")
         application.run_webhook(
             listen="0.0.0.0",
             port=PORT,
-            url_path="/",
+            url_path=url_path,
             webhook_url=WEBHOOK_URL,
             secret_token=os.getenv("WEBHOOK_SECRET") or None,
         )
