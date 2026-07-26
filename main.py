@@ -1587,6 +1587,9 @@ def main():
             SEARCH_QUERY: [MessageHandler(filters.TEXT & ~filters.COMMAND & ~filters.Text(strings.CANCEL), execute_search)],
             ADMIN_BROADCAST: [MessageHandler(filters.ALL & ~filters.COMMAND & ~filters.Text(strings.CANCEL), broadcast_message)],
             # Looking For flow
+            SEEKER_LOOKING_FOR_PURPOSE: [
+                MessageHandler(filters.ALL, seeker_looking_for_start)
+            ],
 
             SEEKER_ALERT_CATEGORY: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND & ~filters.Text(strings.CANCEL), seeker_alert_category)
