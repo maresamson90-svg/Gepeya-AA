@@ -1510,10 +1510,25 @@ def _normalize_webhook_url(webhook_url: str) -> tuple[str, str]:
     return webhook_url, url_path
 
 
+def _resolve_webhook_url() -> str | None:
+    webhook_url = (os.getenv("WEBHOOK_URL") or "").strip()
+    if webhook_url:
+        return webhook_url
+    # Railway injects RAILWAY_PUBLIC_DOMAIN when a public URL is enabled
+    railway_domain = (os.getenv("RAILWAY_PUBLIC_DOMAIN") or "").strip()
+    if railway_domain:
+        return railway_domain
+    return None
+
+
 def _start_webhook(application: Application, port: int) -> None:
-    webhook_url = os.getenv("WEBHOOK_URL")
+    webhook_url = _resolve_webhook_url()
     if not webhook_url:
-        raise ValueError("WEBHOOK_URL environment variable is required when BOT_UPDATE_MODE=webhook")
+        raise ValueError(
+            "WEBHOOK_URL environment variable is required when BOT_UPDATE_MODE=webhook. "
+            "On Railway, enable a public domain (Settings → Networking) or set WEBHOOK_URL "
+            "to your app URL (e.g. your-app.up.railway.app)."
+        )
 
     webhook_url, url_path = _normalize_webhook_url(webhook_url)
 

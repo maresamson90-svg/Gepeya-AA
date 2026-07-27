@@ -32,7 +32,10 @@ Whether deploying to **Railway** or **Hugging Face**, configure the following en
 ### 3. Deploy to Railway (Recommended)
 - Connect your GitHub repository to Railway.
 - Railway will automatically detect the `Dockerfile` and `PORT`.
+- In **Settings → Networking**, click **Generate Domain** so the service has a public URL.
 - Add the Environment Variables above in the Railway Dashboard.
+  - `WEBHOOK_URL` can be omitted if a public domain is enabled — Railway sets `RAILWAY_PUBLIC_DOMAIN` and the bot uses it automatically.
+  - Or set `WEBHOOK_URL` explicitly to your Railway URL (e.g. `your-app.up.railway.app`; `https://` and `/{BOT_TOKEN}` are added automatically).
 
 ### 4. Deploy to Hugging Face Space
 - Create a new **Space** on Hugging Face.
